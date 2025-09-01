@@ -9,7 +9,7 @@ const Icons = {
     <svg className="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 11l3-3m0 0l3 3m-3-3v8m5-4a3 3 0 01-6 0m-3 3a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
   ),
   Users: () => (
-    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
   ),
 };
 
@@ -90,7 +90,7 @@ const CountdownTimer = () => {
   );
 };
 
-// Timeline Component with Scroll Animation
+// Timeline Component
 const Timeline = () => {
     const events = [
         { time: '9:00 AM', title: 'Opening Ceremony', description: 'Kick-off for HACKNOVA 2025 begins!' },
@@ -101,56 +101,21 @@ const Timeline = () => {
         { time: '5:00 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
 
-    const timelineContainerRef = useRef<HTMLDivElement>(null);
-    const [iconTop, setIconTop] = useState(0);
-
-    const handleScroll = () => {
-        const timelineEl = timelineContainerRef.current;
-        if (!timelineEl) return;
-
-        const { top, height } = timelineEl.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        const totalScrollDistance = height + windowHeight;
-        const scrolledDistance = windowHeight - top;
-        const progress = scrolledDistance / totalScrollDistance;
-
-        const clampedProgress = Math.max(0, Math.min(1, progress));
-
-        const trackHeight = timelineEl.clientHeight - 24; 
-        const newTop = clampedProgress * trackHeight;
-        
-        setIconTop(newTop);
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Initial call
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-white">Event <span className="text-yellow-400">Timeline</span></h2>
             </div>
-            <div ref={timelineContainerRef} className="relative max-w-2xl mx-auto">
-                <div className="absolute left-1/2 -translate-x-1/2 h-full top-2 w-0.5 bg-repeat-y bg-[length:4px_12px]" style={{backgroundImage: 'linear-gradient(to bottom, #475569 4px, transparent 4px)'}}></div>
-                
-                <div 
-                    className="w-6 h-6 bg-yellow-400 rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-slate-900 transition-all duration-200 ease-linear"
-                    style={{ top: `${iconTop}px` }}
-                ></div>
-
+            <div className="relative max-w-2xl mx-auto">
+                <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-700/50"></div>
                 {events.map((event, index) => (
-                    <div key={index} className={`relative mb-12 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
-                        <div className={`w-1/2 px-6 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                    <div key={index} className={`relative mb-8 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse text-right' : 'text-left'}`}>
+                        <div className="w-1/2 px-4">
                             <p className="text-lg font-bold text-yellow-400">{event.time}</p>
                             <h3 className="text-xl font-bold text-white mt-1 mb-2">{event.title}</h3>
                             <p className="text-slate-400 text-sm">{event.description}</p>
                         </div>
-                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-800 border-2 border-yellow-400 z-10"></div>
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-600 border-2 border-yellow-400"></div>
                     </div>
                 ))}
             </div>
@@ -169,7 +134,6 @@ export default function App() {
 
     return (
         <div className="antialiased bg-[#0D0A1C] text-slate-200 font-pixel">
-            {/* Background elements */}
             <div className="fixed top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 z-0"></div>
             <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0D0A1C] z-0"></div>
 
@@ -177,7 +141,7 @@ export default function App() {
                 {/* Hero Section */}
                 <section id="home" className="min-h-screen flex items-center justify-center text-center overflow-hidden pt-20">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-wider title-shadow mb-6">
+                        <h1 className="title-font text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-wider title-shadow mb-6">
                            HACKNOVA
                         </h1>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">
