@@ -80,7 +80,7 @@ const CountdownTimer = () => {
     <div className="flex justify-center gap-4 md:gap-8 mt-12">
       {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
         <div key={interval} className="text-center">
-          <div className="text-4xl md:text-6xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
+          <div className="timer-font text-6xl md:text-8xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
             {formatTime(value as number)}
           </div>
           <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
@@ -141,7 +141,7 @@ export default function App() {
                 {/* Hero Section */}
                 <section id="home" className="min-h-screen flex items-center justify-center text-center overflow-hidden pt-20">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="title-font text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-wider title-shadow mb-6">
+                        <h1 className="title-font text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-none tracking-wider title-shadow mb-6">
                            HACKNOVA
                         </h1>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">

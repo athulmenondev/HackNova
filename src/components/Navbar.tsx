@@ -56,7 +56,7 @@ export default function Navbar() {
                 <div className="border border-white/20 bg-[#0D0A1C]/50 backdrop-blur-sm rounded-xl">
                     <div className="flex items-center justify-between h-16 px-6">
                         <div className="flex-shrink-0">
-                            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="title-font text-3xl font-bold text-white tracking-widest transition-all duration-300 hover:text-cyan-400 navbar-brand-glow">
+                            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="title-font text-1xl sm:text-3xl font-bold text-white tracking-widest transition-all duration-300 hover:text-cyan-400 navbar-brand-glow">
                                 HACKNOVA
                             </a>
                         </div>

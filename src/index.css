@@ -22,9 +22,13 @@ html {
 
 @font-face {
   font-family: 'Papa';
-  src: url('/fonts/PapaSardine.otf') format('truetype');
+  src: url('/fonts/PapaSardine.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'digital7';
+  src: url('/fonts/digital-7.ttf') format('truetype');
+}
 
 
 
@@ -48,6 +52,10 @@ p {
 }
 .navbar-title-font{
     font-family:'Papa','Future Sport';
+}
+
+.timer-font {
+    font-family: 'digital7';
 }
 
 .hero-gradient {
