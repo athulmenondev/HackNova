@@ -1,69 +1,17 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+DevDash 2025 - Hackathon WebsiteThis is a modern, single-page website for the DevDash 2025 hackathon, built with Vite, React, TypeScript, and Tailwind CSS. This project provides a sleek, professional, and fully responsive template to kickstart your event's online presence.✨ FeaturesSleek, Modern Design: A dark-themed, visually appealing layout designed to attract and engage participants.Fully Responsive: Looks great on all devices, from mobile phones to desktop monitors.Smooth Scrolling: Easy navigation between sections with smooth scroll behavior.Interactive Mobile Menu: A user-friendly slide-out menu for smaller screens.Component-Based Structure: Built with React for easy management and customization.Type-Safe Code: Developed with TypeScript to ensure robustness and fewer runtime errors.Utility-First Styling: Styled with Tailwind CSS for rapid and consistent UI development.Ready-to-Use Sections: Includes all essential sections for a hackathon: Hero, About, Schedule, Sponsors, and Footer.🚀 Tech StackVite: A next-generation frontend tooling that provides a faster and leaner development experience.React: A JavaScript library for building user interfaces.TypeScript: A statically typed superset of JavaScript that adds type safety.Tailwind CSS: A utility-first CSS framework for creating custom designs without leaving your HTML.Getting StartedPrerequisitesNode.js (v18 or later recommended)npm or yarnInstallationClone the repository or use the provided code to set up your project files.Navigate to the project directory:cd your-project-name
+Install the dependencies:npm install
+Running the Development ServerTo start the local development server, run:npm run dev
+The site will be available at http://localhost:5173/. The server supports Hot Module Replacement (HMR), so changes in your code will reflect in the browser instantly without a full page reload.Building for ProductionTo create a production-ready build of the site:npm run build
+The optimized files will be generated in the dist/ directory. You can preview the production build locally with npm run preview.📂 Project Structure/
+├── public/
+├── src/
+│   ├── components/  (Optional: for smaller, reusable components)
+│   ├── assets/      (For images, fonts, etc.)
+│   ├── App.tsx      (Main application component)
+│   ├── index.css    (Global styles and Tailwind directives)
+│   └── main.tsx     (React app entry point)
+├── index.html       (Main HTML template)
+├── package.json
+├── tailwind.config.js
+└── vite.config.ts
+🎨 CustomizationCustomizing the website is straightforward:Content: All text, links, and schedule details can be modified directly within the src/App.tsx file.Global Styles: To change fonts, primary colors, or add custom CSS classes, edit the src/index.css file.Theme & Colors: You can customize the Tailwind CSS theme, including colors, spacing, and fonts, by editing the tailwind.config.js file.Sponsor Logos: Replace the placeholder images in the Sponsors section within src/App.tsx with your sponsors' logos. It's recommended to place new image assets in the src/assets/ directory and import them.🤝 ContributingContributions are welcome! If you have suggestions for improvements or find any issues, please feel free to open an issue or submit a pull request.📄 LicenseThis project is open-source and available under the MIT License.
