@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Helper component for SVG icons
 const Icons = {
@@ -40,14 +40,14 @@ const CountdownTimer = () => {
     return () => clearTimeout(timer);
   });
 
-  const formatTime = (time) => String(time || 0).padStart(2, '0');
+  const formatTime = (time: number) => String(time || 0).padStart(2, '0');
 
   return (
     <div className="flex justify-center gap-4 md:gap-8 mt-12">
       {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
         <div key={interval} className="text-center">
           <div className="text-4xl md:text-6xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
-            {formatTime(value)}
+            {formatTime(value as number)}
           </div>
           <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
         </div>
@@ -56,7 +56,7 @@ const CountdownTimer = () => {
   );
 };
 
-// Timeline Component
+// Timeline Component with Scroll Animation
 const Timeline = () => {
     const events = [
         { time: '9:00 AM', title: 'Opening Ceremony', description: 'Kick-off for HACKNOVA 2025 begins!' },
@@ -67,21 +67,56 @@ const Timeline = () => {
         { time: '5:00 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
 
+    const timelineContainerRef = useRef<HTMLDivElement>(null);
+    const [iconTop, setIconTop] = useState(0);
+
+    const handleScroll = () => {
+        const timelineEl = timelineContainerRef.current;
+        if (!timelineEl) return;
+
+        const { top, height } = timelineEl.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        const totalScrollDistance = height + windowHeight;
+        const scrolledDistance = windowHeight - top;
+        const progress = scrolledDistance / totalScrollDistance;
+
+        const clampedProgress = Math.max(0, Math.min(1, progress));
+
+        const trackHeight = timelineEl.clientHeight - 24; 
+        const newTop = clampedProgress * trackHeight;
+        
+        setIconTop(newTop);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Initial call
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-white">Event <span className="text-yellow-400">Timeline</span></h2>
             </div>
-            <div className="relative max-w-2xl mx-auto">
-                <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-700/50"></div>
+            <div ref={timelineContainerRef} className="relative max-w-2xl mx-auto">
+                <div className="absolute left-1/2 -translate-x-1/2 h-full top-2 w-0.5 bg-repeat-y bg-[length:4px_12px]" style={{backgroundImage: 'linear-gradient(to bottom, #475569 4px, transparent 4px)'}}></div>
+                
+                <div 
+                    className="w-6 h-6 bg-yellow-400 rounded-full absolute left-1/2 -translate-x-1/2 border-4 border-slate-900"
+                    style={{ top: `${iconTop}px` }}
+                ></div>
+
                 {events.map((event, index) => (
-                    <div key={index} className={`relative mb-8 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse text-right' : 'text-left'}`}>
-                        <div className="w-1/2 px-4">
+                    <div key={index} className={`relative mb-12 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse text-right' : 'text-left'}`}>
+                        <div className="w-1/2 px-6">
                             <p className="text-lg font-bold text-yellow-400">{event.time}</p>
                             <h3 className="text-xl font-bold text-white mt-1 mb-2">{event.title}</h3>
                             <p className="text-slate-400 text-sm">{event.description}</p>
                         </div>
-                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-600 border-2 border-yellow-400"></div>
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-800 border-2 border-yellow-400 z-10"></div>
                     </div>
                 ))}
             </div>
