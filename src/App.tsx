@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react';
 
 // Helper component for SVG icons
 const Icons = {
-  Menu: () => (
-    <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-    </svg>
+  Lightbulb: () => (
+    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
   ),
-  Close: () => (
-    <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  )
+  Trophy: () => (
+    <svg className="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 11l3-3m0 0l3 3m-3-3v8m5-4a3 3 0 01-6 0m-3 3a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
+  ),
+  Users: () => (
+    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+  ),
 };
+
 
 // Countdown Timer Component
 const CountdownTimer = () => {
   const calculateTimeLeft = () => {
-    const difference = +new Date("2025-02-22T00:00:00") - +new Date();
+    const difference = +new Date("2025-09-13T09:00:00") - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -28,7 +28,6 @@ const CountdownTimer = () => {
         seconds: Math.floor((difference / 1000) % 60)
       };
     }
-
     return timeLeft;
   };
 
@@ -38,105 +37,176 @@ const CountdownTimer = () => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-
     return () => clearTimeout(timer);
   });
 
-  const formatTime = (time) => String(time).padStart(2, '0');
+  const formatTime = (time) => String(time || 0).padStart(2, '0');
 
   return (
     <div className="flex justify-center gap-4 md:gap-8 mt-12">
-      {timeLeft.days !== undefined && Object.entries(timeLeft).map(([interval, value]) => (
+      {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
         <div key={interval} className="text-center">
           <div className="text-4xl md:text-6xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
             {formatTime(value)}
           </div>
           <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
         </div>
-      ))}
+      )) : <p className="text-2xl text-green-400">The event has started!</p>}
     </div>
   );
 };
 
-
-export default function App() {
-    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
-    const navLinks = [
-        { href: '#about', text: 'About' },
-        { href: '#themes', text: 'Themes' },
-        { href: '#timeline', text: 'Timeline' },
-        { href: '#sponsors', text: 'Sponsors' },
-        { href: '#prizes', text: 'Prizes' },
-        { href: '#team', text: 'Team' },
-        { href: '#faq', text: 'FAQ' },
-        { href: '#socials', text: 'Socials' },
+// Timeline Component
+const Timeline = () => {
+    const events = [
+        { time: '9:00 AM', title: 'Opening Ceremony', description: 'Kick-off for HACKNOVA 2025 begins!' },
+        { time: '9:30 AM', title: 'Hacking Starts', description: 'Let the coding commence.' },
+        { time: '1:00 PM', title: 'Lunch Break', description: 'Recharge and refuel.' },
+        { time: '4:00 PM', title: 'Hacking Ends', description: 'Final commits and submissions.' },
+        { time: '4:15 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
+        { time: '5:00 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
 
     return (
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Event <span className="text-yellow-400">Timeline</span></h2>
+            </div>
+            <div className="relative max-w-2xl mx-auto">
+                <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-700/50"></div>
+                {events.map((event, index) => (
+                    <div key={index} className={`relative mb-8 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse text-right' : 'text-left'}`}>
+                        <div className="w-1/2 px-4">
+                            <p className="text-lg font-bold text-yellow-400">{event.time}</p>
+                            <h3 className="text-xl font-bold text-white mt-1 mb-2">{event.title}</h3>
+                            <p className="text-slate-400 text-sm">{event.description}</p>
+                        </div>
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-600 border-2 border-yellow-400"></div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+
+// Main App Component
+export default function App() {
+    return (
         <div className="antialiased bg-[#0D0A1C] text-slate-200 font-pixel">
             {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0D0A1C]"></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 z-0"></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0D0A1C] z-0"></div>
 
-            {/* Header */}
-            <header className="fixed w-full z-50 bg-black/10 backdrop-blur-sm">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-20">
-                        <div className="flex-shrink-0">
-                            <a href="#" className="text-3xl font-bold text-white tracking-wider">
-                                <span className="text-pink-500">[</span>HACK<span className="text-cyan-400">NOVA</span><span className="text-pink-500">]</span>
-                            </a>
-                        </div>
-                        <nav className="hidden lg:flex lg:space-x-6">
-                            {navLinks.map((link) => (
-                                 <a key={link.href} href={link.href} className="text-slate-300 hover:text-pink-400 transition duration-150 ease-in-out uppercase text-sm tracking-widest">{link.text}</a>
-                            ))}
-                        </nav>
-                        <div className="flex items-center">
-                            <a href="#" className="hidden sm:inline-block bg-pink-600/80 text-white font-bold px-5 py-2 rounded-md hover:bg-pink-700 transition duration-300 ease-in-out shadow-[0_0_15px_rgba(219,39,119,0.5)]">
-                                Swag
-                            </a>
-                            <button onClick={toggleMenu} className="lg:hidden ml-4 p-2 rounded-md text-slate-300 hover:bg-slate-800 focus:outline-none">
-                                {isMenuOpen ? <Icons.Close /> : <Icons.Menu />}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                {/* Mobile Menu */}
-                <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden bg-[#110D21]/95 backdrop-blur-md`}>
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                         {navLinks.map((link) => (
-                            <a key={link.href} href={link.href} onClick={toggleMenu} className="block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 uppercase tracking-widest">{link.text}</a>
-                        ))}
-                    </div>
-                </div>
-            </header>
-
-            <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-24 text-center z-10">
+            <main className="relative z-10">
+                {/* Hero Section */}
+                <section id="home" className="min-h-screen flex items-center justify-center text-center overflow-hidden pt-20">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none tracking-wider title-shadow mb-6">
-                           HACKNOVA 1.0
+                           HACKNOVA
                         </h1>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">
-                           22-23rd Feb, 2025
+                           Saturday, September 13, 2025 &middot; 9am to 5pm
                         </p>
                         <p className="max-w-3xl mx-auto text-xl md:text-2xl text-slate-200 mb-10 font-bold tracking-wider">
-                           Hustle &middot; Dream &middot; Hack
+                           CODE &middot; CREATE &middot; CONQUER
                         </p>
                         <div className="flex justify-center">
-                           <a href="#" className="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-                                Go to projects
+                           <a href="#about" className="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                                Learn More
                             </a>
                         </div>
                         <CountdownTimer />
                     </div>
                 </section>
+
+                {/* About Section */}
+                <section id="about" className="py-20 md:py-32">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">About <span className="text-cyan-400">The Event</span></h2>
+                        <p className="max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed">
+                            The Programmer's Day Hackathon 2025, organized by STACS at NSS College of Engineering, Palakkad, is a high-energy coding competition celebrating International Programmer's Day. Our objective is to solve real-world challenges, foster innovation, and showcase creativity through technology.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Highlights Section */}
+                <section id="highlights" className="py-20 md:py-32 bg-black/20">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl md:text-5xl font-bold text-white">Event <span className="text-pink-500">Highlights</span></h2>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                            <div className="border border-pink-500/30 bg-pink-500/5 p-8 rounded-lg">
+                                <Icons.Lightbulb />
+                                <h3 className="text-2xl font-bold text-white mb-3">Innovative Problems</h3>
+                                <p className="text-slate-400">Tackle real-world challenges designed to inspire creative and impactful solutions.</p>
+                            </div>
+                            <div className="border border-cyan-400/30 bg-cyan-400/5 p-8 rounded-lg">
+                                <Icons.Trophy />
+                                <h3 className="text-2xl font-bold text-white mb-3">Prizes & Recognition</h3>
+                                <p className="text-slate-400">Rewarding top-performing teams with exciting cash prizes, certificates, and glory.</p>
+                            </div>
+                            <div className="border border-yellow-400/30 bg-yellow-400/5 p-8 rounded-lg">
+                                <Icons.Users />
+                                <h3 className="text-2xl font-bold text-white mb-3">Networking</h3>
+                                <p className="text-slate-400">Connect with fellow student developers from across Kerala and build lasting relationships.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Prizes Section */}
+                <section id="prizes" className="py-20 md:py-32">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl md:text-5xl font-bold text-white">Prize <span className="text-green-400">Pool</span></h2>
+                            <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">A total prize pool of ₹20,000 to be won!</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                             {/* 1st Place */}
+                            <div className="border-2 border-yellow-400 bg-yellow-400/10 p-8 rounded-lg text-center transform md:scale-110 shadow-[0_0_30px_rgba(250,204,21,0.3)]">
+                                <Icons.Trophy />
+                                <h3 className="text-3xl font-bold text-yellow-300 mb-2">1st Place</h3>
+                                <p className="text-4xl font-bold text-white mb-4">₹10,000</p>
+                                <p className="text-slate-400">Plus certificates and swag!</p>
+                            </div>
+                            {/* 2nd Place */}
+                            <div className="border border-slate-500 bg-slate-500/10 p-8 rounded-lg text-center mt-0 md:mt-8">
+                               <Icons.Trophy />
+                                <h3 className="text-2xl font-bold text-slate-300 mb-2">2nd Place</h3>
+                                <p className="text-3xl font-bold text-white mb-4">₹6,000</p>
+                                <p className="text-slate-400">Plus certificates.</p>
+                            </div>
+                             {/* 3rd Place */}
+                            <div className="border border-orange-400 bg-orange-400/10 p-8 rounded-lg text-center mt-0 md:mt-8">
+                                <Icons.Trophy />
+                                <h3 className="text-2xl font-bold text-orange-300 mb-2">3rd Place</h3>
+                                <p className="text-3xl font-bold text-white mb-4">₹4,000</p>
+                                <p className="text-slate-400">Plus certificates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Timeline Section */}
+                <section id="timeline" className="py-20 md:py-32 bg-black/20">
+                    <Timeline />
+                </section>
+                
+                {/* Sponsor Section */}
+                <section id="sponsors" className="py-20 md:py-32">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Become a <span className="text-cyan-400">Sponsor</span></h2>
+                        <p className="max-w-3xl mx-auto text-lg text-slate-300 mb-10 leading-relaxed">
+                            Gain brand visibility, engage with young innovators, and support the next generation of engineers. We have multiple sponsorship tiers and are open to custom packages.
+                        </p>
+                        <a href="mailto:stacs@nssce.ac.in" className="bg-pink-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(219,39,119,0.5)]">
+                            Sponsor Us
+                        </a>
+                    </div>
+                </section>
+
             </main>
         </div>
     );

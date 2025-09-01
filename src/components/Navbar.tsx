@@ -23,13 +23,11 @@ export default function Navbar() {
 
   const navLinks = [
       { href: '#about', text: 'About' },
-      { href: '#themes', text: 'Themes' },
+      { href: '#highlights', text: 'Highlights' },
+      { href: '#prizes', text: 'Prizes' },
       { href: '#timeline', text: 'Timeline' },
       { href: '#sponsors', text: 'Sponsors' },
-      { href: '#prizes', text: 'Prizes' },
-      { href: '#team', text: 'Team' },
-      { href: '#faq', text: 'FAQ' },
-      { href: '#socials', text: 'Socials' },
+      { href: '#contact', text: 'Contact' },
   ];
 
   return (
@@ -37,8 +35,8 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <a href="#" className="text-3xl font-bold text-white tracking-wider">
-              <span className="text-pink-500">[</span>HACK<span className="text-cyan-400">NOVA</span><span className="text-pink-500">]</span>
+            <a href="#home" className="text-3xl font-bold text-white tracking-wider">
+              <span className="text-pink-500">[</span>HACKNOVA<span className="text-pink-500">]</span>
             </a>
           </div>
           <nav className="hidden lg:flex lg:space-x-6">
@@ -47,8 +45,8 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="flex items-center">
-            <a href="#" className="hidden sm:inline-block bg-pink-600/80 text-white font-bold px-5 py-2 rounded-md hover:bg-pink-700 transition duration-300 ease-in-out shadow-[0_0_15px_rgba(219,39,119,0.5)]">
-              Swag
+             <a href="mailto:stacs@nssce.ac.in" className="hidden sm:inline-block bg-cyan-600/80 text-white font-bold px-5 py-2 rounded-md hover:bg-cyan-700 transition duration-300 ease-in-out shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+              Register
             </a>
             <button onClick={toggleMenu} className="lg:hidden ml-4 p-2 rounded-md text-slate-300 hover:bg-slate-800 focus:outline-none">
               {isMenuOpen ? <Icons.Close /> : <Icons.Menu />}
@@ -62,8 +60,12 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={toggleMenu} className="block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 uppercase tracking-widest">{link.text}</a>
           ))}
+           <a href="mailto:stacs@nssce.ac.in" className="block w-full text-center mt-4 bg-cyan-600/80 text-white font-bold px-5 py-3 rounded-md hover:bg-cyan-700 transition duration-300">
+              Register
+            </a>
         </div>
       </div>
     </header>
   );
 };
+
