@@ -1,22 +1,70 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import type { RefObject } from 'react';
 
 // Helper component for SVG icons
 const Icons = {
   Lightbulb: () => (
-    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+    <svg className="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
   ),
   Trophy: () => (
     <svg className="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 11l3-3m0 0l3 3m-3-3v8m5-4a3 3 0 01-6 0m-3 3a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
   ),
   Users: () => (
-    <svg className="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+    <svg className="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
   ),
 };
 
+// Ghost Icon for Timeline
+const GhostIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M10 2a6 6 0 00-6 6v5a2 2 0 002 2h8a2 2 0 002-2v-5a6 6 0 00-6-6zm0 11a1 1 0 110-2 1 1 0 010 2zm-3-4a1 1 0 110-2 1 1 0 010 2zm6 0a1 1 0 110-2 1 1 0 010 2z" />
+      <path d="M10 15v4l-2-1-1-2h6l-1 2-2 1v-4z" />
+    </svg>
+);
+
+// Styles for Pacman Animation
+const PacmanStyles = () => (
+  <style>{`
+    .pacman-container {
+      transform: rotate(-90deg); /* Make it face upwards while moving down */
+      transition: top 0.1s linear;
+    }
+    .pacman-body {
+      background: #FFD700; /* Pacman yellow */
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%);
+      animation: chomp 0.4s infinite;
+      border-radius: 50%;
+    }
+    .pacman-eye {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #0D0A1C;
+      border-radius: 50%;
+      top: 10px;
+      left: 20px;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    @keyframes chomp {
+      0%, 100% {
+        clip-path: polygon(50% 50%, 0 20%, 100% 20%, 100% 80%, 0 80%);
+      }
+      50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+  `}</style>
+);
+
+
 // Custom Hook for Scroll Animations
-const useScrollAnimation = () => {
+const useScrollAnimation = (): readonly [RefObject<HTMLElement | null>, boolean] => {
     const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -33,13 +81,14 @@ const useScrollAnimation = () => {
             }
         );
 
-        if (ref.current) {
-            observer.observe(ref.current);
+        const currentRef = ref.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
@@ -52,7 +101,7 @@ const useScrollAnimation = () => {
 const CountdownTimer = () => {
   const calculateTimeLeft = () => {
     const difference = +new Date("2025-09-13T09:00:00") - +new Date();
-    let timeLeft = {};
+    let timeLeft: { [key: string]: number } = {};
 
     if (difference > 0) {
       timeLeft = {
@@ -81,7 +130,7 @@ const CountdownTimer = () => {
       {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
         <div key={interval} className="text-center">
           <div className="timer-font text-6xl md:text-8xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
-            {formatTime(value as number)}
+            {formatTime(value)}
           </div>
           <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
         </div>
@@ -100,24 +149,115 @@ const Timeline = () => {
         { time: '4:15 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
         { time: '5:00 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
+    
+    const timelineContainerRef = useRef<HTMLDivElement>(null);
+    const [pacmanTop, setPacmanTop] = useState(0);
+    const [timelineHeight, setTimelineHeight] = useState(0);
+
+    const ghostColors = ['text-red-500', 'text-cyan-400', 'text-pink-500', 'text-orange-500', 'text-green-400', 'text-purple-500'];
+
+    const dotsPositions = useMemo(() => {
+        if (timelineHeight === 0) return [];
+        const numDots = events.length * 3;
+        const contentHeight = timelineHeight - 80; // py-10 -> 40px top/bottom padding
+        const gapHeight = contentHeight / (numDots - 1);
+
+        return Array.from({ length: numDots }).map((_, i) => {
+            return 40 + i * gapHeight; // Start at 40px (top padding)
+        });
+    }, [timelineHeight, events.length]);
+
+
+    useEffect(() => {
+        const timelineEl = timelineContainerRef.current;
+        if (!timelineEl) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            setTimelineHeight(timelineEl.offsetHeight);
+        });
+        resizeObserver.observe(timelineEl);
+
+        const handleScroll = () => {
+            const { top, height } = timelineEl.getBoundingClientRect();
+            const scrollableHeight = height - window.innerHeight;
+            const pacmanTravelDistance = timelineEl.offsetHeight - 40; // 40 is pacman height
+
+            if (scrollableHeight <= 0) {
+                // If not scrollable, set pacman to the starting position (top)
+                setPacmanTop(0);
+                return;
+            }
+
+            let progress = -top / scrollableHeight;
+            progress = Math.max(0, Math.min(1, progress));
+            
+            // Move from top to bottom
+            setPacmanTop(progress * pacmanTravelDistance);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Initial check
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (timelineEl) {
+                resizeObserver.unobserve(timelineEl);
+            }
+        };
+    }, []);
 
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-white">Event <span className="text-yellow-400">Timeline</span></h2>
             </div>
-            <div className="relative max-w-2xl mx-auto">
-                <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-700/50"></div>
-                {events.map((event, index) => (
-                    <div key={index} className={`relative mb-8 flex items-center w-full ${index % 2 === 0 ? 'flex-row-reverse text-right' : 'text-left'}`}>
-                        <div className="w-1/2 px-4">
-                            <p className="text-lg font-bold text-yellow-400">{event.time}</p>
-                            <h3 className="text-xl font-bold text-white mt-1 mb-2">{event.title}</h3>
-                            <p className="text-slate-400 text-sm">{event.description}</p>
+            <div ref={timelineContainerRef} className="relative max-w-4xl mx-auto py-12">
+                {/* Pacman Icon */}
+                <div className="absolute left-1/2 -translate-x-1/2 w-20 h-10 flex justify-center items-center z-20" style={{ top: `${pacmanTop}px` }}>
+                    <div className="pacman-container">
+                        <div className="w-10 h-10 relative">
+                          <div className="pacman-body"></div>
+                          <div className="pacman-eye"></div>
                         </div>
-                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-600 border-2 border-yellow-400"></div>
                     </div>
-                ))}
+                </div>
+
+                {/* Dotted Line */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-20 flex flex-col items-center justify-between py-10">
+                    {dotsPositions.map((position, i) => {
+                         // A dot is eaten when pacman's top position is past the dot's position.
+                        const isEaten = pacmanTop > position;
+                        return (
+                            <div
+                                key={i}
+                                className={`w-2 h-2 bg-yellow-400 rounded-full transition-opacity duration-200 ${isEaten ? 'opacity-0' : 'opacity-100'}`}
+                            ></div>
+                        );
+                    })}
+                </div>
+                
+                {/* Timeline Events */}
+                <div className="relative z-10">
+                    {events.map((event, index) => (
+                        <div key={index} className="mb-16">
+                            <div className={`flex items-center ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                                <div className="w-[calc(50%-2.5rem)]">
+                                    <div className={`p-4 rounded-lg border border-slate-700 bg-slate-800/50 backdrop-blur-sm shadow-lg transform transition-transform duration-500 hover:scale-105 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                                        <p className="text-lg font-bold text-yellow-400">{event.time}</p>
+                                        <h3 className="text-xl font-bold text-white mt-1 mb-2">{event.title}</h3>
+                                        <p className="text-slate-400 text-sm">{event.description}</p>
+                                    </div>
+                                </div>
+                                <div className="w-20 flex justify-center">
+                                    <div className={ghostColors[index % ghostColors.length]}>
+                                       <GhostIcon />
+                                    </div>
+                                </div>
+                                <div className="w-[calc(50%-2.5rem)]"></div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -134,6 +274,7 @@ export default function App() {
 
     return (
         <div className="antialiased bg-[#0D0A1C] text-slate-200 font-pixel">
+            <PacmanStyles />
             <div className="fixed top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 z-0"></div>
             <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0D0A1C] z-0"></div>
 
@@ -226,7 +367,7 @@ export default function App() {
                 </section>
 
                 {/* Timeline Section */}
-                <section ref={timelineRef} id="timeline" className={`py-20 md:py-32 bg-black/20 transition-all duration-700 ease-in-out ${isTimelineVisible ? 'opacity-100' : 'opacity-0'}`}>
+                <section ref={timelineRef} id="timeline" className={`py-20 md:py-32 bg-black/20 overflow-hidden transition-all duration-700 ease-in-out ${isTimelineVisible ? 'opacity-100' : 'opacity-0'}`}>
                     <Timeline />
                 </section>
                 
@@ -242,9 +383,7 @@ export default function App() {
                         </a>
                     </div>
                 </section>
-
             </main>
         </div>
     );
 }
-
