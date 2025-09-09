@@ -180,7 +180,7 @@ export default function Navbar() {
 
             <div className="flex items-center">
               <a
-                href="https://www.google.com"//add the gforms link here
+                href="https://forms.gle/FwDfucXJxgxrcJ9S6"//add the gforms link here
                 className="hidden sm:inline-block bg-pink-600 text-white font-bold px-5 py-2 rounded-md hover:bg-pink-700 transition duration-150 ease-in-out shadow-[0_0_15px_rgba(219,39,119,0.4)] text-sm uppercase tracking-wider"
               >
                 Register
