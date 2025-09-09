@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import type { RefObject } from 'react';
-import wonderLandLogoText from './assets/wonderland_logo_text.png';
-import wonderLandLogo from './assets/wonderland_logo.png';
+import wonderLandLogo from './assets/wonderland_logo_text.png';
+import wonderLandLogoText from './assets/wonderland_logo.png';
 
 // Helper component for SVG icons
 const Icons = {
@@ -289,7 +289,7 @@ export default function App() {
                         </h1>
                         <div className="flex flex-col items-center mb-6">
                             <p className="text-lg md:text-xl text-slate-400 font-bold mb-2">In Association with</p>
-                            <img src={wonderLandLogo} alt="Associated Logo" className="h-36 w-auto"  />
+                            <img src={wonderLandLogo} alt="Associated Logo" className="h-36 w-auto rounded-3xl"  />
                         </div>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">
                            Saturday, September 13, 2025 &middot; 9am to 5pm
