@@ -301,7 +301,7 @@ export default function App() {
                            <a href="#about" className="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                                 Learn More
                             </a>
-                            <a href="https://wonder.land/register" target="_blank" rel="noopener noreferrer" className="bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+                            <a href="https://forms.gle/FwDfucXJxgxrcJ9S6" target="_blank" rel="noopener noreferrer" className="bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.5)]">
                                 Register Now
                            </a>
                         </div>
