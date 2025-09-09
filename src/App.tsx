@@ -289,7 +289,7 @@ export default function App() {
                         </h1>
                         <div className="flex flex-col items-center mb-6">
                             <p className="text-lg md:text-xl text-slate-400 font-bold mb-2">In Association with</p>
-                            <img src={wonderLandLogo} alt="Associated Logo" className="h-16 w-auto" />
+                            <img src={wonderLandLogo} alt="Associated Logo" className="h-36 w-auto"  />
                         </div>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">
                            Saturday, September 13, 2025 &middot; 9am to 5pm
@@ -297,10 +297,13 @@ export default function App() {
                         <p className="max-w-3xl mx-auto text-xl md:text-2xl text-slate-200 mb-10 font-bold tracking-wider">
                            CODE &middot; CREATE &middot; CONQUER
                         </p>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center gap-8">
                            <a href="#about" className="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                                 Learn More
                             </a>
+                            <a href="https://wonder.land/register" target="_blank" rel="noopener noreferrer" className="bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+                                Register Now
+                           </a>
                         </div>
                         <CountdownTimer />
                     </div>
@@ -368,7 +371,7 @@ export default function App() {
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">🌟</h3>
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">Special Jury Award</h3>
                                 <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
-                                <p className="text-slate-400">For Best VR project.</p>
+                                <p className="text-slate-400">Best Immersive web project with Wonderland.</p>
                             </div>
                         </div>
                     </div>
