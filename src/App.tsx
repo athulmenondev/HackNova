@@ -362,7 +362,7 @@ export default function App() {
                             <div className={`border-2 border-slate-500 bg-slate-500/10 p-8 rounded-lg text-center transform md:scale-110 shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 ease-in-out delay-300 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">🥈</h3>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">2nd Place</h3>
-                                <p className="text-3xl font-bold text-white mb-4">₹6,000</p>
+                                <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
                                 <p className="text-slate-400">Plus certificates.</p>
                             </div>
                         </div>
