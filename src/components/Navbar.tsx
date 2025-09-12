@@ -179,13 +179,13 @@ export default function Navbar() {
             </nav>
 
             <div className="flex items-center">
-              <a
+              {/* <a
                 href="https://forms.gle/FwDfucXJxgxrcJ9S6"//add the gforms link here
                 target="_blank"
                 className="hidden sm:inline-block bg-pink-600 text-white font-bold px-5 py-2 rounded-md hover:bg-pink-700 transition duration-150 ease-in-out shadow-[0_0_15px_rgba(219,39,119,0.4)] text-sm uppercase tracking-wider"
               >
                 Register
-              </a>
+              </a> */}
               <div className="md:hidden">
                 <button
                   onClick={toggleMenu}
@@ -216,13 +216,13 @@ export default function Navbar() {
                   </a>
                 ))}
                 <div className="p-4">
-                  <a
+                  {/* <a
                     href="https://forms.gle/FwDfucXJxgxrcJ9S6"
                     target="_blank"
                     className="block w-full text-center bg-pink-600 text-white font-bold px-4 py-3 rounded-lg hover:bg-pink-700 transition duration-150 ease-in-out uppercase tracking-wider"
                   >
                     Register
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
