@@ -276,12 +276,9 @@ const Guidelines = () => {
                 <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <p className="font-bold text-xl text-yellow-300">🌟 Hello HackNovians! 🌟</p>
                     <p>
-                        We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
+                        🚀 Here are some important guidelines to make sure you’re fully prepared:
                     </p>
-                    <ul className="list-disc list-inside space-y-2 text-white">
-                        {/* <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li> */}
-                        <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
-                    </ul>
+                    
                     <p className="font-bold text-lg text-orange-400 mt-8">📌 Essential Guidelines</p>
                     <ul className="list-disc list-inside space-y-2">
                         <li><span className="font-bold">⏰ Arrive strictly by 9:00 AM</span> at the venue.</li>
@@ -418,13 +415,13 @@ export default function App() {
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">🥇</h3>
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">1st Place</h3>
                                 <p className="text-4xl font-bold text-white mb-4">₹10,000</p>
-                                <p className="text-slate-400">Plus certificates and swag!</p>
+                                <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
                             <div className={`border-2 border-slate-500 bg-slate-500/10 p-8 rounded-lg text-center transform md:scale-110 shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 ease-in-out delay-300 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">🥈</h3>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">2nd Place</h3>
                                 <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
-                                <p className="text-slate-400">Plus certificates.</p>
+                                <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
                         </div>
                         <div className={`flex justify-center mt-8`}>
