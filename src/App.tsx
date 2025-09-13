@@ -147,9 +147,9 @@ const Timeline = () => {
         { time: '9:00 AM', title: 'Opening Ceremony', description: 'Kick-off for HACKNOVA 2025 begins!' },
         { time: '9:30 AM', title: 'Hacking Starts', description: 'Let the coding commence.' },
         { time: '1:00 PM', title: 'Lunch Break', description: 'Recharge and refuel.' },
-        { time: '4:00 PM', title: 'Hacking Ends', description: 'Final commits and submissions.' },
-        { time: '4:15 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
-        { time: '5:00 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
+        { time: '3:00 PM', title: 'Hacking Ends', description: 'Final commits and submissions.' },
+        { time: '3:30 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
+        { time: '4:30 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
 
     const timelineContainerRef = useRef<HTMLDivElement>(null);
