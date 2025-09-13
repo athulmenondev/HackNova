@@ -279,8 +279,8 @@ const Guidelines = () => {
                         We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
                     </p>
                     <ul className="list-disc list-inside space-y-2 text-white">
-                        <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li>
-                        <li className="font-bold">💡 A Special Jury Award awaits teams building VR-related projects or using Wonderland Engine tools!</li>
+                        {/* <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li> */}
+                        <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
                     </ul>
                     <p className="font-bold text-lg text-orange-400 mt-8">📌 Essential Guidelines</p>
                     <ul className="list-disc list-inside space-y-2">
@@ -295,6 +295,29 @@ const Guidelines = () => {
                     <p className="italic text-yellow-300">
                         Get ready to <span className="font-bold">Imagine, Innovate, Inspire</span>. See you all at HackNova! 🎉
                     </p>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const ProblemStatements = () => {
+    const [problemStatementsRef, isProblemStatementsVisible] = useScrollAnimation();
+
+    return (
+        <section ref={problemStatementsRef} id="problem-statements" className={`py-20 md:py-32 bg-black/20 text-center transition-all duration-500 ease-in-out ${isProblemStatementsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-500 ease-in-out delay-100 ${isProblemStatementsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Problem <span className="text-pink-500">Statements</span></h2>
+                <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isProblemStatementsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    <p className="text-center font-bold text-lg text-yellow-300">
+                        Here are our Problem statements, choose one and begin to ideate 💡
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-white">
+                        <li><span className="font-bold">1. Environment & Disaster Management</span></li>
+                        <li><span className="font-bold">2. Healthcare</span></li>
+                        <li><span className="font-bold">3. Infrastructure & Public Safety</span></li>
+                        <li><span className="font-bold">4. Education</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -353,7 +376,7 @@ export default function App() {
                         </p>
                     </div>
                 </section>
-
+                <ProblemStatements/>
                 {/* Guidelines Section (NEW) */}
                 <Guidelines />
 
@@ -442,4 +465,4 @@ export default function App() {
             </main>
         </div>
     );
-}
+}``
