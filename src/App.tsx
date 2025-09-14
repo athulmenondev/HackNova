@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import type { RefObject } from 'react';
-import wonderLandLogo from './assets/wonderland_logo_text.png';
-import wonderLandLogoText from './assets/wonderland_logo.png';
+import wonderlandLogo from './assets/wonderland_logo_text.png';
+import wonderlandLogoText from './assets/wonderland_logo.png';
+import FirstPrize from './assets/First_prize.jpg';
+import SecondPrize from './assets/Second_prize.jpg';
+import SpecialPrize from './assets/Special_Price.jpg';
 
 // Helper component for SVG icons
 const Icons = {
@@ -276,10 +279,14 @@ const Guidelines = () => {
                 <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <p className="font-bold text-xl text-yellow-300">🌟 Hello HackNovians! 🌟</p>
                     <p>
-                        🚀 Here are some important guidelines to make sure you’re fully prepared:
+                        We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
                     </p>
+                    <ul className="list-disc list-inside space-y-2 text-white">
+                        <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li>
+                        <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
+                    </ul>
                     
-                    <p className="font-bold text-lg text-orange-400 mt-8">📌 Essential Guidelines</p>
+                    <h3 className="text-2xl font-bold text-cyan-400 pt-4">📌 Essential Guidelines</h3>
                     <ul className="list-disc list-inside space-y-2">
                         <li><span className="font-bold">⏰ Arrive strictly by 9:00 AM</span> at the venue.</li>
                         <li><span className="font-bold">🍽️ Breakfast will not be provided.</span> Lunch & refreshments are on us.</li>
@@ -298,6 +305,7 @@ const Guidelines = () => {
     );
 };
 
+// Problem Statements Component
 const ProblemStatements = () => {
     const [problemStatementsRef, isProblemStatementsVisible] = useScrollAnimation();
 
@@ -325,7 +333,9 @@ const ProblemStatements = () => {
 export default function App() {
     const [aboutRef, isAboutVisible] = useScrollAnimation();
     const [highlightsRef, isHighlightsVisible] = useScrollAnimation();
+    const [problemStatementsRef, isProblemStatementsVisible] = useScrollAnimation();
     const [prizesRef, isPrizesVisible] = useScrollAnimation();
+    const [guidelinesRef, isGuidelinesVisible] = useScrollAnimation();
     const [timelineRef, isTimelineVisible] = useScrollAnimation();
     const [sponsorsRef, isSponsorsVisible] = useScrollAnimation();
 
@@ -344,23 +354,19 @@ export default function App() {
                         </h1>
                         <div className="flex flex-col items-center mb-6">
                             <p className="text-lg md:text-xl text-slate-400 font-bold mb-2">In Association with</p>
-                            <img src={wonderLandLogo} alt="Associated Logo" className="h-36 w-auto rounded-3xl" />
+                            <img src={wonderlandLogo} alt="Wonderland Labs logo" className="h-36 w-auto rounded-3xl" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src='https://placehold.co/192x72/0D0A1C/94A3B8?text=Wonderland+Labs'; }} />
                         </div>
                         <p className="max-w-3xl mx-auto text-lg md:text-xl text-cyan-300 mb-4 tracking-widest">
                             Saturday, September 13, 2025 &middot; 9am to 5pm
                         </p>
-                        <p className="max-w-3xl mx-auto text-xl md:text-2xl text-slate-200 mb-10 font-bold tracking-wider">
-                            CODE &middot; CREATE &middot; CONQUER
+                        <p className="max-w-3xl mx-auto text-2xl md:text-3xl text-green-400 mb-10 font-bold tracking-wider">
+                            The event is over! Thank you to all who participated.
                         </p>
-                        <div className="flex justify-center gap-8">
+                        <div className="flex justify-center">
                             <a href="#about" className="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                                 Learn More
                             </a>
-                            {/* <a href="https://forms.gle/FwDfucXJxgxrcJ9S6" target="_blank" rel="noopener noreferrer" className="bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.5)]">
-                                Register Now
-                            </a> */}
                         </div>
-                        <CountdownTimer />
                     </div>
                 </section>
 
@@ -373,10 +379,10 @@ export default function App() {
                         </p>
                     </div>
                 </section>
-                <ProblemStatements/>
-                {/* Guidelines Section (NEW) */}
-                <Guidelines />
-
+                
+                {/* Problem Statements Section (NEW) */}
+                <ProblemStatements />
+                
                 {/* Highlights Section */}
                 <section ref={highlightsRef} id="highlights" className={`py-20 md:py-32 bg-black/20`}>
                     <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isHighlightsVisible ? 'opacity-100' : 'opacity-0'}`}>
@@ -405,41 +411,75 @@ export default function App() {
 
                 {/* Prizes Section */}
                 <section ref={prizesRef} id="prizes" className={`py-20 md:py-32`}>
-                    <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isPrizesVisible ? 'opacity-100' : 'opacity-0'}`}>
+                     <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isPrizesVisible ? 'opacity-100' : 'opacity-0'}`}>
                         <div className="text-center mb-16">
                             <h2 className={`text-4xl md:text-5xl font-bold text-white transition-all duration-500 ease-in-out ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Prize <span className="text-green-400">Pool</span> of <span className='text-pink-500'>₹20,000</span></h2>
                             <p className={`mt-4 text-lg text-slate-400 max-w-2xl mx-auto transition-all duration-500 ease-in-out delay-100 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>A total prize pool of ₹20,000 to be won!</p>
                         </div>
-                        <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto">
-                            <div className={`border-2 border-yellow-400 bg-yellow-400/10 p-8 rounded-lg text-center transform md:scale-110 shadow-[0_0_30px_rgba(250,204,21,0.3)] transition-all duration-500 ease-in-out delay-200 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        <div className="flex flex-col space-y-8 max-w-4xl mx-auto">
+                            <div className={`border-2 border-yellow-400 bg-yellow-400/10 p-8 rounded-lg text-center transform md:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.3)] transition-all duration-500 ease-in-out delay-200 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <img src={FirstPrize} alt="First prize photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">🥇</h3>
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">1st Place</h3>
                                 <p className="text-4xl font-bold text-white mb-4">₹10,000</p>
                                 <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
-                            <div className={`border-2 border-slate-500 bg-slate-500/10 p-8 rounded-lg text-center transform md:scale-110 shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 ease-in-out delay-300 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className={`border-2 border-slate-500 bg-slate-500/10 p-8 rounded-lg text-center transform md:scale-105 shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 ease-in-out delay-300 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <img src={SecondPrize} alt="Second prize photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">🥈</h3>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">2nd Place</h3>
-                                <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
+                                <p className="text-3xl font-bold text-white mb-4">₹6,000</p>
                                 <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
-                        </div>
-                        <div className={`flex justify-center mt-8`}>
-                            <div className={`border border-pink-500 bg-pink-500/10 p-8 rounded-lg text-center max-w-sm w-full transition-all duration-500 ease-in-out delay-400 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className={`border border-pink-500 bg-pink-500/10 p-8 rounded-lg text-center transform md:scale-105 shadow-[0_0_30px_rgba(219,39,119,0.3)] transition-all duration-500 ease-in-out delay-400 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <img src={SpecialPrize} alt="Special Jury Award photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">🌟</h3>
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">Special Jury Award</h3>
                                 <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
-                                <p className="text-slate-400">Best Immersive web project with Wonderland.</p>
+                                <p className="text-slate-400">Best Immersive web project with Wonderland</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                {/* Guidelines Section */}
+                {/* <section ref={guidelinesRef} id="guidelines" className={`py-20 md:py-32`}>
+                     <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100' : 'opacity-0'}`}>
+                        <div className="text-center mb-16">
+                            <h2 className={`text-4xl md:text-5xl font-bold text-white transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Essential <span className="text-orange-400">Guidelines</span></h2>
+                        </div>
+                        <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <p className="font-bold text-xl text-yellow-300">🌟 Hello HackNovians! 🌟</p>
+                            <p>
+                                We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
+                            </p>
+                            <ul className="list-disc list-inside space-y-2 text-white">
+                                <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li>
+                                <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
+                            </ul>
+                            
+                            <h3 className="text-2xl font-bold text-cyan-400 pt-4">📌 Essential Guidelines</h3>
+                            <ul className="list-disc list-inside space-y-2">
+                                <li><span className="font-bold">⏰ Arrive strictly by 9:00 AM</span> at the venue.</li>
+                                <li><span className="font-bold">🍽️ Breakfast will not be provided.</span> Lunch & refreshments are on us.</li>
+                                <li><span className="font-bold">💧 Bring your own water</span> and stay hydrated throughout the day.</li>
+                                <li><span className="font-bold">🌐 Ensure you have your own internet source</span> (hotspot/data). We’ll support wherever possible, but be prepared.</li>
+                                <li><span className="font-bold">💻 Bring your laptop fully charged and don’t forget your charger</span> (yes, you’ll definitely need it!).</li>
+                                <li><span className="font-bold">📱 Team leaders</span> – double-check that all members have joined the official WhatsApp group.</li>
+                                <li><span className="font-bold">🔥 Most importantly</span> – bring your creative spirit, innovative fire, and hyped-up energy. That’s what HackNova is all about!</li>
+                            </ul>
+                            <p className="italic text-yellow-300">
+                                Get ready to <span className="font-bold">Imagine, Innovate, Inspire</span>. See you all at HackNova! 🎉
+                            </p>
+                        </div>
+                    </div>
+                </section> */}
+
                 {/* Timeline Section */}
                 <section ref={timelineRef} id="timeline" className={`py-20 md:py-32 bg-black/20 overflow-hidden transition-all duration-700 ease-in-out ${isTimelineVisible ? 'opacity-100' : 'opacity-0'}`}>
                     <Timeline />
                 </section>
-
+                
                 {/* Sponsor Section */}
                 <section ref={sponsorsRef} id="sponsors" className={`py-20 md:py-32`}>
                     <div className={`container mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-500 ease-in-out ${isSponsorsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -447,11 +487,11 @@ export default function App() {
                         <p className={`max-w-3xl mx-auto text-lg text-slate-300 mb-10 leading-relaxed transition-all duration-500 ease-in-out delay-200 ${isSponsorsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                             A huge thank you to our incredible sponsor for supporting HACKNOVA 2025 and helping us make this event a reality!
                         </p>
-                        <div className={`flex flex-col items-center justify-center p-8 border border-pink-500/30 bg-white-300/ rounded-lg shadow-lg max-w-lg mx-auto transition-all duration-500 ease-in-out delay-300 ${isSponsorsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                            <img src={wonderLandLogoText} alt="Create Worlds logo" className="w-48 h-auto mb-6 rounded-md shadow-md" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://placehold.co/192x72/0D0A1C/94A3B8?text=Create+Worlds'; }} />
+                        <div className={`flex flex-col items-center justify-center p-8 border border-pink-500/30 bg-pink-500/5 rounded-lg shadow-lg max-w-lg mx-auto transition-all duration-500 ease-in-out delay-300 ${isSponsorsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <img src={wonderlandLogoText} alt="Create Worlds logo" className="w-48 h-auto mb-6 rounded-md shadow-md" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src='https://placehold.co/192x72/0D0A1C/94A3B8?text=Create+Worlds'; }} />
                             <div className="text-center text-slate-400">
                                 <p className="text-xl font-bold text-white mb-2">Create Worlds</p>
-                                <p className="text-sm">aDBA Robot Invader, Inc.</p>
+                                <p className="text-sm">a DBA Robot Invader, Inc.</p>
                                 <p className="text-sm">10080 N. Wolfe Rd. Suite SW3-200</p>
                                 <p className="text-sm">Cupertino California 95014</p>
                                 <p className="text-sm">USA</p>
@@ -462,4 +502,4 @@ export default function App() {
             </main>
         </div>
     );
-}``
+}
