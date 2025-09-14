@@ -315,7 +315,7 @@ const ProblemStatements = () => {
                 <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-500 ease-in-out delay-100 ${isProblemStatementsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Problem <span className="text-pink-500">Statements</span></h2>
                 <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isProblemStatementsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <p className="text-center font-bold text-lg text-yellow-300">
-                        Here are our Problem statements, choose one and begin to ideate 💡
+                        These Where our Problem statements, choose one and begin to ideate 💡
                     </p>
                     <ul className="list-disc list-inside space-y-2 text-white">
                         <li><span className="font-bold">1. Environment & Disaster Management</span></li>
