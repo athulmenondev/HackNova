@@ -150,9 +150,9 @@ const Timeline = () => {
         { time: '9:00 AM', title: 'Opening Ceremony', description: 'Kick-off for HACKNOVA 2025 begins!' },
         { time: '9:30 AM', title: 'Hacking Starts', description: 'Let the coding commence.' },
         { time: '1:00 PM', title: 'Lunch Break', description: 'Recharge and refuel.' },
-        { time: '3:00 PM', title: 'Hacking Ends', description: 'Final commits and submissions.' },
-        { time: '3:30 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
-        { time: '4:30 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
+        { time: '4:00 PM', title: 'Hacking Ends', description: 'Final commits and submissions.' },
+        { time: '4:30 PM', title: 'Judging Begins', description: 'Our judges review the projects.' },
+        { time: '5:30 PM', title: 'Awards Ceremony', description: 'Announcing the winners.' },
     ];
 
     const timelineContainerRef = useRef<HTMLDivElement>(null);
@@ -414,13 +414,14 @@ export default function App() {
                      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isPrizesVisible ? 'opacity-100' : 'opacity-0'}`}>
                         <div className="text-center mb-16">
                             <h2 className={`text-4xl md:text-5xl font-bold text-white transition-all duration-500 ease-in-out ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Prize <span className="text-green-400">Pool</span> of <span className='text-pink-500'>₹20,000</span></h2>
-                            <p className={`mt-4 text-lg text-slate-400 max-w-2xl mx-auto transition-all duration-500 ease-in-out delay-100 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>A total prize pool of ₹20,000 to be won!</p>
+                            {/* <p className={`mt-4 text-lg text-slate-400 max-w-2xl mx-auto transition-all duration-500 ease-in-out delay-100 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>A total prize pool of ₹20,000 to be won!</p> */}
                         </div>
                         <div className="flex flex-col space-y-8 max-w-4xl mx-auto">
                             <div className={`border-2 border-yellow-400 bg-yellow-400/10 p-8 rounded-lg text-center transform md:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.3)] transition-all duration-500 ease-in-out delay-200 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                 <img src={FirstPrize} alt="First prize photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">🥇</h3>
                                 <h3 className="text-3xl font-bold text-yellow-300 mb-2">1st Place</h3>
+                                <p className="text-xl font-bold text-white mt-1">Stardust Crusaders</p>
                                 <p className="text-4xl font-bold text-white mb-4">₹10,000</p>
                                 <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
@@ -428,22 +429,24 @@ export default function App() {
                                 <img src={SecondPrize} alt="Second prize photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">🥈</h3>
                                 <h3 className="text-2xl font-bold text-slate-300 mb-2">2nd Place</h3>
-                                <p className="text-3xl font-bold text-white mb-4">₹6,000</p>
+                                <p className="text-xl font-bold text-white mt-1">Kathaliparambil & Yukthi</p>
+                                <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
                                 <p className="text-slate-400">Plus certificates and swags!</p>
                             </div>
                             <div className={`border border-pink-500 bg-pink-500/10 p-8 rounded-lg text-center transform md:scale-105 shadow-[0_0_30px_rgba(219,39,119,0.3)] transition-all duration-500 ease-in-out delay-400 ${isPrizesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                 <img src={SpecialPrize} alt="Special Jury Award photo" className="mx-auto my-4 rounded-lg" />
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">🌟</h3>
                                 <h3 className="text-2xl font-bold text-pink-500 mb-2">Special Jury Award</h3>
+                                <p className="text-xl font-bold text-white mt-1">Weare</p>
                                 <p className="text-3xl font-bold text-white mb-4">₹5,000</p>
-                                <p className="text-slate-400">Best Immersive web project with Wonderland</p>
+                                <p className="text-slate-400">Best Immersive web project with Wonderland.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Guidelines Section */}
-                {/* <section ref={guidelinesRef} id="guidelines" className={`py-20 md:py-32`}>
+                {/* Guidelines Section
+                <section ref={guidelinesRef} id="guidelines" className={`py-20 md:py-32`}>
                      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100' : 'opacity-0'}`}>
                         <div className="text-center mb-16">
                             <h2 className={`text-4xl md:text-5xl font-bold text-white transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Essential <span className="text-orange-400">Guidelines</span></h2>
