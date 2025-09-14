@@ -103,46 +103,46 @@ const useScrollAnimation = (): readonly [RefObject<HTMLElement | null>, boolean]
 
 
 // Countdown Timer Component
-const CountdownTimer = () => {
-    const calculateTimeLeft = () => {
-        const difference = +new Date("2025-09-13T09:00:00") - +new Date();
-        let timeLeft: { [key: string]: number } = {};
+// const CountdownTimer = () => {
+//     const calculateTimeLeft = () => {
+//         const difference = +new Date("2025-09-13T09:00:00") - +new Date();
+//         let timeLeft: { [key: string]: number } = {};
 
-        if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60)
-            };
-        }
-        return timeLeft;
-    };
+//         if (difference > 0) {
+//             timeLeft = {
+//                 days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+//                 hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+//                 minutes: Math.floor((difference / 1000 / 60) % 60),
+//                 seconds: Math.floor((difference / 1000) % 60)
+//             };
+//         }
+//         return timeLeft;
+//     };
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+//     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-        return () => clearTimeout(timer);
-    });
+//     useEffect(() => {
+//         const timer = setTimeout(() => {
+//             setTimeLeft(calculateTimeLeft());
+//         }, 1000);
+//         return () => clearTimeout(timer);
+//     });
 
-    const formatTime = (time: number) => String(time || 0).padStart(2, '0');
+//     const formatTime = (time: number) => String(time || 0).padStart(2, '0');
 
-    return (
-        <div className="flex justify-center gap-4 md:gap-8 mt-12">
-            {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
-                <div key={interval} className="text-center">
-                    <div className="timer-font text-6xl md:text-8xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
-                        {formatTime(value)}
-                    </div>
-                    <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
-                </div>
-            )) : <p className="text-2xl text-green-400">The event has started!</p>}
-        </div>
-    );
-};
+//     return (
+//         <div className="flex justify-center gap-4 md:gap-8 mt-12">
+//             {Object.entries(timeLeft).length > 0 ? Object.entries(timeLeft).map(([interval, value]) => (
+//                 <div key={interval} className="text-center">
+//                     <div className="timer-font text-6xl md:text-8xl font-bold p-4 rounded-lg bg-black/30 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center" style={{ color: ['#ff0055', '#00ff99', '#ffaa00', '#00ccff'][Object.keys(timeLeft).indexOf(interval)] }}>
+//                         {formatTime(value)}
+//                     </div>
+//                     <div className="text-sm uppercase tracking-widest mt-2 text-slate-400">{interval}</div>
+//                 </div>
+//             )) : <p className="text-2xl text-green-400">The event has started!</p>}
+//         </div>
+//     );
+// };
 
 // Timeline Component
 const Timeline = () => {
@@ -269,41 +269,41 @@ const Timeline = () => {
 };
 
 // Guidelines Component
-const Guidelines = () => {
-    const [guidelinesRef, isGuidelinesVisible] = useScrollAnimation();
+// const Guidelines = () => {
+//     const [guidelinesRef, isGuidelinesVisible] = useScrollAnimation();
 
-    return (
-        <section ref={guidelinesRef} id="guidelines" className={`py-20 md:py-32 bg-black/20 text-center transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-500 ease-in-out delay-100 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Essential <span className="text-orange-400">Guidelines</span></h2>
-                <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <p className="font-bold text-xl text-yellow-300">🌟 Hello HackNovians! 🌟</p>
-                    <p>
-                        We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
-                    </p>
-                    <ul className="list-disc list-inside space-y-2 text-white">
-                        <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li>
-                        <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
-                    </ul>
+//     return (
+//         <section ref={guidelinesRef} id="guidelines" className={`py-20 md:py-32 bg-black/20 text-center transition-all duration-500 ease-in-out ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+//             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+//                 <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-500 ease-in-out delay-100 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Essential <span className="text-orange-400">Guidelines</span></h2>
+//                 <div className={`max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed text-left space-y-4 transition-all duration-500 ease-in-out delay-200 ${isGuidelinesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+//                     <p className="font-bold text-xl text-yellow-300">🌟 Hello HackNovians! 🌟</p>
+//                     <p>
+//                         We’re just a day away from <span className="italic">HackNova</span>, and we can already feel the energy buzzing! 🚀 Here are some important guidelines to make sure you’re fully prepared:
+//                     </p>
+//                     <ul className="list-disc list-inside space-y-2 text-white">
+//                         <li className="font-bold">✨ Problem Statements will be released tomorrow. You and your team can pick the one that excites you the most.</li>
+//                         <li className="font-bold">💡 A Special Jury Award awaits the most outstanding immersive web project built using Wonderland Engine !</li>
+//                     </ul>
                     
-                    <h3 className="text-2xl font-bold text-cyan-400 pt-4">📌 Essential Guidelines</h3>
-                    <ul className="list-disc list-inside space-y-2">
-                        <li><span className="font-bold">⏰ Arrive strictly by 9:00 AM</span> at the venue.</li>
-                        <li><span className="font-bold">🍽️ Breakfast will not be provided.</span> Lunch & refreshments are on us.</li>
-                        <li><span className="font-bold">💧 Bring your own water</span> and stay hydrated throughout the day.</li>
-                        <li><span className="font-bold">🌐 Ensure you have your own internet source</span> (hotspot/data). We’ll support wherever possible, but be prepared.</li>
-                        <li><span className="font-bold">💻 Bring your laptop fully charged and don’t forget your charger</span> (yes, you’ll definitely need it!).</li>
-                        <li><span className="font-bold">📱 Team leaders</span> – double-check that all members have joined the official WhatsApp group.</li>
-                        <li><span className="font-bold">🔥 Most importantly</span> – bring your creative spirit, innovative fire, and hyped-up energy. That’s what HackNova is all about!</li>
-                    </ul>
-                    <p className="italic text-yellow-300">
-                        Get ready to <span className="font-bold">Imagine, Innovate, Inspire</span>. See you all at HackNova! 🎉
-                    </p>
-                </div>
-            </div>
-        </section>
-    );
-};
+//                     <h3 className="text-2xl font-bold text-cyan-400 pt-4">📌 Essential Guidelines</h3>
+//                     <ul className="list-disc list-inside space-y-2">
+//                         <li><span className="font-bold">⏰ Arrive strictly by 9:00 AM</span> at the venue.</li>
+//                         <li><span className="font-bold">🍽️ Breakfast will not be provided.</span> Lunch & refreshments are on us.</li>
+//                         <li><span className="font-bold">💧 Bring your own water</span> and stay hydrated throughout the day.</li>
+//                         <li><span className="font-bold">🌐 Ensure you have your own internet source</span> (hotspot/data). We’ll support wherever possible, but be prepared.</li>
+//                         <li><span className="font-bold">💻 Bring your laptop fully charged and don’t forget your charger</span> (yes, you’ll definitely need it!).</li>
+//                         <li><span className="font-bold">📱 Team leaders</span> – double-check that all members have joined the official WhatsApp group.</li>
+//                         <li><span className="font-bold">🔥 Most importantly</span> – bring your creative spirit, innovative fire, and hyped-up energy. That’s what HackNova is all about!</li>
+//                     </ul>
+//                     <p className="italic text-yellow-300">
+//                         Get ready to <span className="font-bold">Imagine, Innovate, Inspire</span>. See you all at HackNova! 🎉
+//                     </p>
+//                 </div>
+//             </div>
+//         </section>
+//     );
+// };
 
 // Problem Statements Component
 const ProblemStatements = () => {
@@ -333,9 +333,9 @@ const ProblemStatements = () => {
 export default function App() {
     const [aboutRef, isAboutVisible] = useScrollAnimation();
     const [highlightsRef, isHighlightsVisible] = useScrollAnimation();
-    const [problemStatementsRef, isProblemStatementsVisible] = useScrollAnimation();
+    // const [problemStatementsRef, isProblemStatementsVisible] = useScrollAnimation();
     const [prizesRef, isPrizesVisible] = useScrollAnimation();
-    const [guidelinesRef, isGuidelinesVisible] = useScrollAnimation();
+    // const [guidelinesRef, isGuidelinesVisible] = useScrollAnimation();
     const [timelineRef, isTimelineVisible] = useScrollAnimation();
     const [sponsorsRef, isSponsorsVisible] = useScrollAnimation();
 
